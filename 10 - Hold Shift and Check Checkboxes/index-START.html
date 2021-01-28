@@ -31,8 +31,9 @@
     }
 
     input:checked + p {
-      background: #F9F9F9;
+      background: #e1f5dc;
       text-decoration: line-through;
+      color: rgb(55, 70, 55);
     }
 
     input[type="checkbox"] {
@@ -96,6 +97,44 @@
   </div>
 
 <script>
+
+let lastChecked;
+let inBetween = false;
+
+  // select checkboxes from DOM
+  const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+  
+  // event to run handleCheck upon clicking checkbox
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+  
+  // take in click event
+  function handleCheck(e){
+    
+    // if shift key down while checking separate two boxes with empty boxes in between
+    if (e.shiftKey && this.checked){
+      
+      //loop through each checkbox
+      checkboxes.forEach(checkbox =>{
+        
+        // create switch to set inBetween to true if false
+        if(checkbox === this || checkbox === lastChecked){
+          inBetween = !inBetween;
+        }
+      });
+
+      //  completes the check action when set to true
+      if(inBetween){
+        checkbox.checked = true;
+      };
+
+    };
+    lastChecked = this;
+  }
+
+ 
+
+ 
+
 </script>
 </body>
 </html>
