@@ -7,7 +7,12 @@
 <body>
 
   <div class="hero">
-    <h1 contenteditable>🔥WOAH!</h1>
+    <h1 contenteditable>🍩 WOAH, DONUTS!</h1>
+
+    <div id="gif">
+      <a href="/gif/bill-teds-bogus-journey-310-movie-clip-i-totally-possessed-my-dad-1991-hd-2OryqV" title="Bill & Ted's Bogus Journey (3/10) Movie CLIP - I Totally Possessed My Dad (1991) HD"><img src="https://i.makeagif.com/media/10-16-2015/2OryqV.gif" alt="Bill & Ted's Bogus Journey (3/10) Movie CLIP - I Totally Possessed My Dad (1991) HD"></a>
+    </div>
+
   </div>
 
   <style>
@@ -18,23 +23,63 @@
 
   body {
     margin: 0;
+    background-color: rgb(255, 245, 160);
   }
 
   .hero {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     color: black;
   }
 
   h1 {
-    text-shadow: 10px 10px 0 rgba(0,0,0,1);
+    text-shadow: 10px 10px 0 rgb(0, 0, 0);
     font-size: 100px;
+    text-align: center;
+    color:#ff5b0f;
   }
+
+  #gif {
+    
+  }
+
   </style>
 
 <script>
+
+const hero = document.querySelector('.hero');
+const text = hero.querySelector('h1');
+const walk = 120; // 100 px
+
+function shadow(e){
+  
+  const { offsetWidth: width, offsetHeight: height} = hero;
+  let {offsetX: x, offsetY: y} = e;
+
+  if(this !== e.target) {
+    x = x + e.target.offsetLeft;
+    y = y + e.target.offsetTop;
+  }
+
+  const xWalk = Math.round((x / width * walk) - (walk / 2));
+  const yWalk = Math.round((y / height * walk) - (walk / 2));
+
+  text.style.textShadow = `
+    ${xWalk}px ${yWalk}px 0 rgba(255, 0, 255, 0.7),
+    ${xWalk * -1}px ${yWalk}px 0 rgba(0, 255, 255, 0.7),
+    ${yWalk}px ${xWalk * -1}px 0 rgba(0, 255, 0, 0.7),
+    ${yWalk}px ${xWalk * 1}px 0 rgba(0, 0, 255, 0.7)
+    `;
+  
+  console.log(xWalk, yWalk);
+
+}
+
+hero.addEventListener('mousemove', shadow);
+
 </script>
 </body>
 </html>
